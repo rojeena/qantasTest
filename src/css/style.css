@@ -14,6 +14,9 @@ body {
     text-align: center;
 }
 
+.header{
+    background-color: #ed0e0e !important;
+}
 
 .detail-container{
     text-align: center;

@@ -8,7 +8,7 @@ import {
 
 class Header extends React.Component  {
     render() {
-        return (<AppBar position="static">
+        return (<AppBar className='header' position="sticky">
                 <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap>
                        {this.props.title}
