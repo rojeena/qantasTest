@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {URL}  from './../constants/index'
+import {URL} from './../constants/index'
 import Header from './Header'
 import Footer from './Footer'
-import Posts from '../helper/Posts';
+import Posts from './Posts';
 import '../css/style.css';
 import Detail from "./Detail";
 
@@ -19,17 +19,19 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.setState({ loading: true});
+        this.setState({loading: true});
         axios.get(URL)
             .then(res => {
-                if(res.status === 200) {
-                    console.log('Successfully retrieved');
+                if (res.status === 200) {
                     this.setState({
                         posts: res.data,
                         loading: false
-                    })
-                }
-            });
+                    });
+                } else throw new Error('Oops, something went wrong');
+            }).catch(error => {
+            alert(error);
+            this.setState({loading: false});
+        });
     }
 
     handleClick = (data) => {
@@ -49,13 +51,15 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Header  title={this.state.displayStatus === 1? 'List of Airports' : this.state.postDetail.airportName}/>
+                <Header
+                    title={this.state.displayStatus === 1 ? 'List of Airports' : this.state.postDetail.airportName}/>
                 <div className={'body'}>
                     {
                         this.state.displayStatus === 1 ?
-                            <Posts handleClick={this.handleClick} toggleDisplayStatus={this.toggleDisplayStatus} posts={this.state.posts} loading={this.state.loading} />
+                            <Posts handleClick={this.handleClick} toggleDisplayStatus={this.toggleDisplayStatus}
+                                   posts={this.state.posts} loading={this.state.loading}/>
                             :
-                            <Detail toggleDisplayStatus={this.toggleDisplayStatus} postDetail={this.state.postDetail} />
+                            <Detail toggleDisplayStatus={this.toggleDisplayStatus} postDetail={this.state.postDetail}/>
                     }
                 </div>
                 <Footer/>

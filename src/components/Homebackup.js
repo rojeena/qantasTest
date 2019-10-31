@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Posts from '../helper/Posts';
-import Pagination from '../helper/Pagination';
+import Posts from './Posts';
+import Pagination from '../commons/Pagination';
 import axios from 'axios';
 import {URL}  from './../constants/index'
 import Header from "./Header";
