@@ -52,7 +52,7 @@ class Home extends Component {
         return (
             <div>
                 <Header
-                    title={this.state.displayStatus === 1 ? 'List of Airports' : this.state.postDetail.airportName}/>
+                    title={this.state.displayStatus === 1 ? 'List of Airports Qantas' : this.state.postDetail.airportName}/>
                 <div className={'body'}>
                     {
                         this.state.displayStatus === 1 ?

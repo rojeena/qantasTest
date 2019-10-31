@@ -28,6 +28,11 @@ body {
     padding-bottom: 3%;
 }
 
+.back-button {
+    background-color: #ed0e0e !important;
+    margin: 12px 0 !important;
+}
+
 .post-list {
     border-bottom: 1px solid #ccc;
 }

@@ -57,16 +57,15 @@ class Detail extends Component {
                                         <TableRow>
                                             <TableCell component="th"> Latitude / Longitude</TableCell>
                                             <TableCell>{this.props.postDetail.location.latitude + '° ' +
-                                            this.props.postDetail.location.latitudeDirection + ' / ' +
+                                            (this.props.postDetail.location.latitudeDirection  ? this.props.postDetail.location.latitudeDirection :'') + ' / ' +
                                             this.props.postDetail.location.longitude+'° '+
-                                            this.props.postDetail.location.longitudeDirection
+                                            (this.props.postDetail.location.longitudeDirection ? this.props.postDetail.location.longitudeDirection:'' )
                                             }</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
                 }
-                <br/>
-                <Button onClick={()=>this.props.toggleDisplayStatus(1)} variant="contained" color="primary"> Go Back</Button>
+                <Button className='back-button' onClick={()=>this.props.toggleDisplayStatus(1)} variant="contained" color="primary"> Go Back</Button>
                 <Footer/>
             </div>
         );
