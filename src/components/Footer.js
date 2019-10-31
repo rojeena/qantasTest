@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 class Footer extends Component {
     render() {
         return (
-            <footer class={'footer'}>
+            <footer className='footer'>
                 <Typography component="p">
                     @2019 All right reserved
                 </Typography>

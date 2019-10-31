@@ -3,17 +3,18 @@ import axios from 'axios';
 import {URL}  from './../constants/index'
 import Header from './Header'
 import Footer from './Footer'
-import Posts from "../helper/Posts";
-import Container from "@material-ui/core/Container";
+import Posts from '../helper/Posts';
 import '../css/style.css';
-
+import Detail from "./Detail";
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
-            currentPosts: []
+            posts: [],
+            postDetail: {},
+            displayStatus: 1 // 1 is for the list, 2 is for the detail
         };
     }
 
@@ -22,29 +23,43 @@ class Home extends Component {
         axios.get(URL)
             .then(res => {
                 if(res.status === 200) {
+                    console.log('Successfully retrieved');
                     this.setState({
-                        currentPosts: res.data
+                        posts: res.data,
+                        loading: false
                     })
                 }
-            })
-        setTimeout( () => {
-            this.setState({ loading: false});
-        }, 2000);
+            });
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log('Error');
-    }
+    handleClick = (data) => {
+        this.setState({
+            postDetail: data
+        }, () => {
+            this.toggleDisplayStatus(2);
+        });
+    };
+    toggleDisplayStatus = (status) => {
+        this.setState({
+            displayStatus: status
+        })
+    };
+
 
     render() {
         return (
-            <Container >
-                <Header title={'List of Airports'}/>
+            <div>
+                <Header  title={this.state.displayStatus === 1? 'List of Airports' : this.state.postDetail.airportName}/>
                 <div className={'body'}>
-                    <Posts posts={this.state.currentPosts} loading={this.state.loading} />
+                    {
+                        this.state.displayStatus === 1 ?
+                            <Posts handleClick={this.handleClick} toggleDisplayStatus={this.toggleDisplayStatus} posts={this.state.posts} loading={this.state.loading} />
+                            :
+                            <Detail toggleDisplayStatus={this.toggleDisplayStatus} postDetail={this.state.postDetail} />
+                    }
                 </div>
                 <Footer/>
-            </Container>
+            </div>
         );
     }
 }
